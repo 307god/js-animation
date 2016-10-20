@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多物体动画</title>
+</head>
+<style>
+    body,ul,li{
+        margin: 0;
+        padding: 0;
+    }
+    ul,li{
+        list-style: none;
+    }
+    ul li{
+        width: 150px;
+        height: 150px;
+        background: yellow;
+        margin-bottom: 20px;
+        border: 12px solid #000;
+        font-size: 1px;
+        color: #00f;
+        filter: alpha(opacity: 30);
+        opacity: 0.3;
+    }
+</style>
+<script>
+    window.onload = function () {
+        var aLi = document.getElementsByTagName('li');
+        for(var i = 0; i < aLi.length; i++){
+            aLi[i].timer = null;
+            if (Math.random()<0.333) {
+                aLi[i].onmouseover = function () {
+                    startMove(this, 'width', 300);
+                };
+                aLi[i].onmouseout = function () {
+                    startMove(this, 'width', 150);
+                }
+            } else if (Math.random()<0.666) {
+                aLi[i].onmouseover = function () {
+                    startMove(this, 'height', 300);
+                };
+                aLi[i].onmouseout = function () {
+                    startMove(this, 'height', 150);
+                }
+            } else {
+                aLi[i].onmouseover = function () {
+                    startMove(this, 'opacity', 100);
+                };
+                aLi[i].onmouseout = function () {
+                    startMove(this, 'opacity', 30);
+                }
+            }
+        }
+    };
+
+    var speed = 0;
+    var icur = 0;
+
+    function startMove(obj, attr, iTarget) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+            if (attr == 'opacity'){
+                icur = Math.round(parseFloat(getStyle(obj,attr)) * 100);
+            } else {
+                icur = parseInt(getStyle(obj, attr));
+            }
+            speed = (iTarget - icur)/8;
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+            if (icur == iTarget){
+                clearInterval(obj.timer);
+            }else{
+                if (attr == 'opacity'){
+                    obj.style.filter = 'alpha(opacity: '  + (icur + speed) + ');';
+                    obj.style[attr] = (icur + speed)/100;
+                } else {
+                    obj.style[attr] = icur + speed + 'px';
+                }
+                obj.style.fontSize = parseInt(getStyle(obj, 'fontSize')) + speed+ 'px';
+            }
+        },30)
+    }
+
+    function getStyle(obj, attr){
+        if (obj.currentStyle){
+            return obj.currentStyle[attr];
+        }else{
+            return getComputedStyle(obj, false)[attr];
+        }
+    }
+</script>
+<body>
+<ul>
+    <li>font-size</li>
+    <li>font-size</li>
+    <li>font-size</li>
+    <li>font-size</li>
+    <li>font-size</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+#wrap{
+    position: relative;
+}
+#box{
+    cursor: move;
+    position:absolute;
+    width: 360px;
+    left:200px;
+    top:50px;
+    padding:30px;
+    text-align: center;
+    background-color: #fff;
+    overflow: auto;
+    border-radius: 15px;
+    border: 4px solid #ccc;
+}
+#box a{
+    width: 80px;
+    height: 80px;
+    background-color: #fd8e2f;
+    text-decoration: none;
+    margin: 10px 20px;
+    float: left;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+#box img{
+    width: 40px;
+    height: 40px;
+}
+#box i{
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    opacity: 1;
+}
+#box p{
+    margin-top: 60px;
+}
+#box p:hover{
+    color: #fff;
+}
+#box #close{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+}
